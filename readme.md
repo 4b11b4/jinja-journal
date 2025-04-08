@@ -44,3 +44,31 @@ File names should use hyphenated format, which will be converted to title case i
 The application uses two templates:
 - `index.html`: For the main index page listing all entries
 - `entry.html`: For individual entry pages
+
+## Deployment
+
+### GitHub Pages Deployment
+
+This project is configured to automatically build and deploy to GitHub Pages using GitHub Actions. Here's how it works:
+
+1. Push your changes to the main branch
+2. GitHub Actions automatically:
+   - Sets up a Python environment
+   - Installs the required dependencies
+   - Builds the site by running app.py
+   - Deploys the generated files to the gh-pages branch
+
+3. Your site will be available at:
+   ```
+   https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+   ```
+
+#### First-time setup:
+
+After pushing your code with the workflow file:
+1. Go to your repository on GitHub
+2. Navigate to Settings > Pages
+3. Under "Source", select the "gh-pages" branch and the "/" (root) folder
+4. Click "Save"
+
+The GitHub Action will handle rebuilding and deploying your site whenever you push new changes or add new entries.
