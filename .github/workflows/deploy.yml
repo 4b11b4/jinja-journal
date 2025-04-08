@@ -2,19 +2,15 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main  # Set this to your default branch
+      - main
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
 permissions:
   contents: read
   pages: write
   id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   build:
