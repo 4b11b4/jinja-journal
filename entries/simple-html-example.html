@@ -1,0 +1,78 @@
+<div class="html-entry">
+    <h2>HTML Entry Example</h2>
+    
+    <p>This is an example of an HTML entry. The file name <code>simple-html-example.html</code> will be transformed into the title "Simple Html Example".</p>
+    
+    <p>With HTML entries, you can:</p>
+    
+    <ul>
+        <li>Use direct HTML formatting</li>
+        <li>Include custom styles inline</li>
+        <li>Embed more complex HTML structures</li>
+    </ul>
+    
+    <div style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0;">
+        <p>This is a custom styled box in HTML.</p>
+    </div>
+    
+    <p>HTML entries are useful when you need more control over the appearance and structure of your content.</p>
+
+    <h3>Interactive Canvas Example</h3>
+    
+    <div style="margin: 20px 0;">
+        <canvas id="interactiveCanvas" width="400" height="200" style="border: 1px solid #000; background-color: #f8f8f8;"></canvas>
+        
+        <div style="margin-top: 10px;">
+            <button id="button1" style="padding: 8px 15px; margin-right: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Button 1</button>
+            <button id="button2" style="padding: 8px 15px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;">Button 2</button>
+        </div>
+    </div>
+
+    <script>
+        // This script will be executed when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the canvas and buttons
+            const canvas = document.getElementById('interactiveCanvas');
+            const ctx = canvas.getContext('2d');
+            const button1 = document.getElementById('button1');
+            const button2 = document.getElementById('button2');
+            
+            // Function to draw on canvas for Button 1
+            function drawButton1Content() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#4CAF50';
+                ctx.fillRect(50, 50, 100, 100);
+                ctx.font = '16px Arial';
+                ctx.fillStyle = 'white';
+                ctx.fillText('Button 1 Active', 55, 100);
+            }
+            
+            // Function to draw on canvas for Button 2
+            function drawButton2Content() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#2196F3';
+                ctx.beginPath();
+                ctx.arc(canvas.width - 100, 100, 50, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'white';
+                ctx.fillText('Button 2 Active', canvas.width - 150, 105);
+            }
+            
+            // Initial drawing
+            drawButton1Content();
+            
+            // Add click event listeners to buttons
+            button1.addEventListener('click', function() {
+                button1.style.display = 'none';
+                button2.style.display = 'inline-block';
+                drawButton2Content();
+            });
+            
+            button2.addEventListener('click', function() {
+                button2.style.display = 'none';
+                button1.style.display = 'inline-block';
+                drawButton1Content();
+            });
+        });
+    </script>
+</div> 

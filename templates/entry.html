@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Jinja Journal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .entry-date {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .entry-content {
+            margin-bottom: 40px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ entry.title }}</h1>
+        <div class="entry-date">{{ entry.date }}</div>
+    </header>
+    
+    <main>
+        <div class="entry-content">
+            {{ content|safe }}
+        </div>
+        
+        <p><a href="index.html">← Back to Index</a></p>
+    </main>
+    
+    <footer>
+        <p>Generated with Jinja Journal</p>
+    </footer>
+</body>
+</html> 

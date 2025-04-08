@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .entry {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .entry-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+        <p>A simple journal generated with Jinja2</p>
+    </header>
+    
+    <main>
+        {% if entries %}
+            {% for entry in entries %}
+                <div class="entry">
+                    <h2><a href="{{ entry.slug }}.html">{{ entry.title }}</a></h2>
+                    <div class="entry-date">{{ entry.date }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No entries found.</p>
+        {% endif %}
+    </main>
+    
+    <footer>
+        <p>Generated with Jinja Journal</p>
+    </footer>
+</body>
+</html> 
