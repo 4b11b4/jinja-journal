@@ -28,7 +28,7 @@ To set up an environment and run it:
 The application:
 1. Scans all files in the `entries/` directory
 2. Generates a title from each filename (converting hyphenated names to title case)
-3. Uses the file's last modified date as the entry date
+3. Uses the `git` history to get the creation and last modification date 
 4. Generates an index page listing all entries
 5. Generates individual HTML pages for each entry
 6. Outputs all files to the `output/` directory
@@ -68,7 +68,7 @@ This project is configured to automatically build and deploy to GitHub Pages usi
 After pushing your code with the workflow file:
 1. Go to your repository on GitHub
 2. Navigate to Settings > Pages
-3. Under "Source", select the "gh-pages" branch and the "/" (root) folder
+3. Under "Source", select "GitHub Actions"
 4. Click "Save"
 
 The GitHub Action will handle rebuilding and deploying your site whenever you push new changes or add new entries.
