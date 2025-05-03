@@ -6,5 +6,6 @@ we need to understand these concepts.
 
 ## Foundational Concepts
 ### The Structure of a Float
-a decimal
+part before the decimal
+part after the decimal
 
