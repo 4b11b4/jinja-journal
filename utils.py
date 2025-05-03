@@ -36,22 +36,23 @@ def get_git_dates(filepath):
         creation_date_str = (
             subprocess.check_output(creation_cmd, text=True).strip().split("\n")[0]
         )
-        creation_date = datetime.datetime.fromisoformat(
-            creation_date_str.replace(" ", "T").replace(" -", "-")
-        )
+
+        # Parse the date string safely
+        creation_date = parse_git_date(creation_date_str)
 
         # Get the last commit date (modification date)
         modified_cmd = ["git", "log", "-1", "--format=%ad", "--date=iso", filepath]
         modified_date_str = subprocess.check_output(modified_cmd, text=True).strip()
-        modified_date = datetime.datetime.fromisoformat(
-            modified_date_str.replace(" ", "T").replace(" -", "-")
-        )
+
+        # Parse the date string safely
+        modified_date = parse_git_date(modified_date_str)
 
         return {
             "created": creation_date.strftime("%Y-%m-%d"),
             "modified": modified_date.strftime("%Y-%m-%d"),
         }
-    except (subprocess.SubprocessError, IndexError):
+    except (subprocess.SubprocessError, IndexError, ValueError) as e:
+        print(f"Warning: Could not get git dates for {filepath}: {e}")
         # Fallback to file system dates if git command fails
         modified_time = os.path.getmtime(filepath)
         modified_date = datetime.datetime.fromtimestamp(modified_time).strftime(
@@ -59,6 +60,33 @@ def get_git_dates(filepath):
         )
         # Since we can't get creation from file system easily, use the same date
         return {"created": modified_date, "modified": modified_date}
+
+
+def parse_git_date(date_str):
+    """Parse git date string into datetime object."""
+    # Git date format is usually: "2023-04-07 19:21:02 -0700"
+    try:
+        # Try to directly parse with datetime
+        return datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S %z")
+    except ValueError:
+        try:
+            # If that fails, try to manually format the string to ISO format
+            # First split the string into components
+            date_parts = date_str.split(" ")
+            if len(date_parts) >= 3:
+                date = date_parts[0]
+                time = date_parts[1]
+                timezone = date_parts[2]
+
+                # Format into proper ISO format
+                iso_format = f"{date}T{time}{timezone}"
+                return datetime.datetime.fromisoformat(iso_format)
+            else:
+                raise ValueError(f"Could not parse date string: {date_str}")
+        except Exception as e:
+            print(f"Error parsing date: {date_str}, error: {e}")
+            # Last resort: just use current time
+            return datetime.datetime.now()
 
 
 def get_entry_metadata(filepath):
