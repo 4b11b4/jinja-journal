@@ -39,7 +39,12 @@
             {% for entry in entries %}
                 <div class="entry">
                     <h2><a href="{{ entry.slug }}.html">{{ entry.title }}</a></h2>
-                    <div class="entry-date">{{ entry.date }}</div>
+                    <div class="entry-date">
+                        Created: {{ entry.created_date }}
+                        {% if entry.created_date != entry.modified_date %}
+                        <br>Last Modified: {{ entry.modified_date }}
+                        {% endif %}
+                    </div>
                 </div>
             {% endfor %}
         {% else %}

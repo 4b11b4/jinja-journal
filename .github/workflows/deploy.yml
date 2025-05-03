@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper git date extraction
 
       - name: Set up Python
         uses: actions/setup-python@v5

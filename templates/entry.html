@@ -37,7 +37,12 @@
 <body>
     <header>
         <h1>{{ entry.title }}</h1>
-        <div class="entry-date">{{ entry.date }}</div>
+        <div class="entry-date">
+            Created: {{ entry.created_date }}
+            {% if entry.created_date != entry.modified_date %}
+            <br>Last Modified: {{ entry.modified_date }}
+            {% endif %}
+        </div>
     </header>
     
     <main>
